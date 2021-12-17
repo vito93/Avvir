@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище AvvirEntities" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UIN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ContactList">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ContactListOwner" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AccountInListGUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GroupDict">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GroupTypeGUID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GroupType">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AuthorGUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ReceiverGUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MessageBody" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserGroupRole">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AccountGUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GroupGUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GroupRoleGUID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Author">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="AuthorGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactList_Account_InList">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="ContactList" Type="Self.ContactList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="ContactList">
+              <PropertyRef Name="AccountInListGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactList_Account_Owner">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="ContactList" Type="Self.ContactList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="ContactList">
+              <PropertyRef Name="ContactListOwner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupDict_GroupType">
+          <End Role="GroupType" Type="Self.GroupType" Multiplicity="1" />
+          <End Role="GroupDict" Type="Self.GroupDict" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupType">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="GroupDict">
+              <PropertyRef Name="GroupTypeGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receiver">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="ReceiverGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGroupRole_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="UserGroupRole" Type="Self.UserGroupRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="UserGroupRole">
+              <PropertyRef Name="AccountGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGroupRole_GroupDict">
+          <End Role="GroupDict" Type="Self.GroupDict" Multiplicity="1" />
+          <End Role="UserGroupRole" Type="Self.UserGroupRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupDict">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="UserGroupRole">
+              <PropertyRef Name="GroupGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище AvvirEntitiesContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactList" EntityType="Self.ContactList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupDict" EntityType="Self.GroupDict" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupType" EntityType="Self.GroupType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGroupRole" EntityType="Self.UserGroupRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Author" Association="Self.FK_Author">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactList_Account_InList" Association="Self.FK_ContactList_Account_InList">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="ContactList" EntitySet="ContactList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactList_Account_Owner" Association="Self.FK_ContactList_Account_Owner">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="ContactList" EntitySet="ContactList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupDict_GroupType" Association="Self.FK_GroupDict_GroupType">
+            <End Role="GroupType" EntitySet="GroupType" />
+            <End Role="GroupDict" EntitySet="GroupDict" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receiver" Association="Self.FK_Receiver">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGroupRole_Account" Association="Self.FK_UserGroupRole_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="UserGroupRole" EntitySet="UserGroupRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGroupRole_GroupDict" Association="Self.FK_UserGroupRole_GroupDict">
+            <End Role="GroupDict" EntitySet="GroupDict" />
+            <End Role="UserGroupRole" EntitySet="UserGroupRole" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AvvirEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="UIN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Message" Relationship="Self.FK_Author" FromRole="Account" ToRole="Message" />
+          <NavigationProperty Name="ContactList" Relationship="Self.FK_ContactList_Account_InList" FromRole="Account" ToRole="ContactList" />
+          <NavigationProperty Name="ContactList1" Relationship="Self.FK_ContactList_Account_Owner" FromRole="Account" ToRole="ContactList" />
+          <NavigationProperty Name="Message1" Relationship="Self.FK_Receiver" FromRole="Account" ToRole="Message" />
+          <NavigationProperty Name="UserGroupRole" Relationship="Self.FK_UserGroupRole_Account" FromRole="Account" ToRole="UserGroupRole" />
+        </EntityType>
+        <EntityType Name="ContactList">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="ContactListOwner" Type="Guid" Nullable="false" />
+          <Property Name="AccountInListGUID" Type="Guid" Nullable="false" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_ContactList_Account_InList" FromRole="ContactList" ToRole="Account" />
+          <NavigationProperty Name="Account1" Relationship="Self.FK_ContactList_Account_Owner" FromRole="ContactList" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="GroupDict">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroupTypeGUID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="GroupType" Relationship="Self.FK_GroupDict_GroupType" FromRole="GroupDict" ToRole="GroupType" />
+          <NavigationProperty Name="UserGroupRole" Relationship="Self.FK_UserGroupRole_GroupDict" FromRole="GroupDict" ToRole="UserGroupRole" />
+        </EntityType>
+        <EntityType Name="GroupType">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GroupDict" Relationship="Self.FK_GroupDict_GroupType" FromRole="GroupType" ToRole="GroupDict" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="AuthorGUID" Type="Guid" Nullable="false" />
+          <Property Name="ReceiverGUID" Type="Guid" Nullable="false" />
+          <Property Name="MessageBody" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Author" FromRole="Message" ToRole="Account" />
+          <NavigationProperty Name="Account1" Relationship="Self.FK_Receiver" FromRole="Message" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="UserGroupRole">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="AccountGUID" Type="Guid" Nullable="false" />
+          <Property Name="GroupGUID" Type="Guid" Nullable="false" />
+          <Property Name="GroupRoleGUID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_UserGroupRole_Account" FromRole="UserGroupRole" ToRole="Account" />
+          <NavigationProperty Name="GroupDict" Relationship="Self.FK_UserGroupRole_GroupDict" FromRole="UserGroupRole" ToRole="GroupDict" />
+        </EntityType>
+        <Association Name="FK_Author">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="AuthorGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactList_Account_InList">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="ContactList" Type="Self.ContactList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="ContactList">
+              <PropertyRef Name="AccountInListGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactList_Account_Owner">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="ContactList" Type="Self.ContactList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="ContactList">
+              <PropertyRef Name="ContactListOwner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receiver">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="ReceiverGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGroupRole_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="UserGroupRole" Type="Self.UserGroupRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="UserGroupRole">
+              <PropertyRef Name="AccountGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupDict_GroupType">
+          <End Role="GroupType" Type="Self.GroupType" Multiplicity="1" />
+          <End Role="GroupDict" Type="Self.GroupDict" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupType">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="GroupDict">
+              <PropertyRef Name="GroupTypeGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGroupRole_GroupDict">
+          <End Role="GroupDict" Type="Self.GroupDict" Multiplicity="1" />
+          <End Role="UserGroupRole" Type="Self.UserGroupRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupDict">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="UserGroupRole">
+              <PropertyRef Name="GroupGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AvvirModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Account" EntityType="Self.Account" />
+          <EntitySet Name="ContactList" EntityType="Self.ContactList" />
+          <EntitySet Name="GroupDict" EntityType="Self.GroupDict" />
+          <EntitySet Name="GroupType" EntityType="Self.GroupType" />
+          <EntitySet Name="Message" EntityType="Self.Message" />
+          <EntitySet Name="UserGroupRole" EntityType="Self.UserGroupRole" />
+          <AssociationSet Name="FK_Author" Association="Self.FK_Author">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactList_Account_InList" Association="Self.FK_ContactList_Account_InList">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="ContactList" EntitySet="ContactList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactList_Account_Owner" Association="Self.FK_ContactList_Account_Owner">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="ContactList" EntitySet="ContactList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receiver" Association="Self.FK_Receiver">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGroupRole_Account" Association="Self.FK_UserGroupRole_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="UserGroupRole" EntitySet="UserGroupRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupDict_GroupType" Association="Self.FK_GroupDict_GroupType">
+            <End Role="GroupType" EntitySet="GroupType" />
+            <End Role="GroupDict" EntitySet="GroupDict" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGroupRole_GroupDict" Association="Self.FK_UserGroupRole_GroupDict">
+            <End Role="GroupDict" EntitySet="GroupDict" />
+            <End Role="UserGroupRole" EntitySet="UserGroupRole" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище AvvirEntitiesContainer" CdmEntityContainer="AvvirModel">
+          <EntitySetMapping Name="Account">
+            <EntityTypeMapping TypeName="AvvirEntities.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+                <ScalarProperty Name="UIN" ColumnName="UIN" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactList">
+            <EntityTypeMapping TypeName="AvvirEntities.ContactList">
+              <MappingFragment StoreEntitySet="ContactList">
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+                <ScalarProperty Name="ContactListOwner" ColumnName="ContactListOwner" />
+                <ScalarProperty Name="AccountInListGUID" ColumnName="AccountInListGUID" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupDict">
+            <EntityTypeMapping TypeName="AvvirEntities.GroupDict">
+              <MappingFragment StoreEntitySet="GroupDict">
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="GroupTypeGUID" ColumnName="GroupTypeGUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupType">
+            <EntityTypeMapping TypeName="AvvirEntities.GroupType">
+              <MappingFragment StoreEntitySet="GroupType">
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Message">
+            <EntityTypeMapping TypeName="AvvirEntities.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+                <ScalarProperty Name="AuthorGUID" ColumnName="AuthorGUID" />
+                <ScalarProperty Name="ReceiverGUID" ColumnName="ReceiverGUID" />
+                <ScalarProperty Name="MessageBody" ColumnName="MessageBody" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGroupRole">
+            <EntityTypeMapping TypeName="AvvirEntities.UserGroupRole">
+              <MappingFragment StoreEntitySet="UserGroupRole">
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+                <ScalarProperty Name="AccountGUID" ColumnName="AccountGUID" />
+                <ScalarProperty Name="GroupGUID" ColumnName="GroupGUID" />
+                <ScalarProperty Name="GroupRoleGUID" ColumnName="GroupRoleGUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

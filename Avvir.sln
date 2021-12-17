@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "AvvirDatabase", "AvvirDatabase\AvvirDatabase.sqlproj", "{19F2055D-F9DF-4C10-8D9A-5B8755AC39FE}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Avvir.Database", "AvvirDatabase\Avvir.Database.sqlproj", "{19F2055D-F9DF-4C10-8D9A-5B8755AC39FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avvir.DataLayer", "Avvir.DataLayer\Avvir.DataLayer.csproj", "{00497AD5-EBF0-446B-A60C-BA676BFF218B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +19,10 @@ Global
 		{19F2055D-F9DF-4C10-8D9A-5B8755AC39FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19F2055D-F9DF-4C10-8D9A-5B8755AC39FE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19F2055D-F9DF-4C10-8D9A-5B8755AC39FE}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{00497AD5-EBF0-446B-A60C-BA676BFF218B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00497AD5-EBF0-446B-A60C-BA676BFF218B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00497AD5-EBF0-446B-A60C-BA676BFF218B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00497AD5-EBF0-446B-A60C-BA676BFF218B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
