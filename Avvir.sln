@@ -7,6 +7,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Avvir.Database", "AvvirData
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avvir.DataLayer", "Avvir.DataLayer\Avvir.DataLayer.csproj", "{00497AD5-EBF0-446B-A60C-BA676BFF218B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avvir.Middleware", "Avvir.Middleware\Avvir.Middleware.csproj", "{970D26AC-17CD-4B74-AF42-783B2E8748D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{00497AD5-EBF0-446B-A60C-BA676BFF218B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00497AD5-EBF0-446B-A60C-BA676BFF218B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00497AD5-EBF0-446B-A60C-BA676BFF218B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{970D26AC-17CD-4B74-AF42-783B2E8748D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{970D26AC-17CD-4B74-AF42-783B2E8748D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{970D26AC-17CD-4B74-AF42-783B2E8748D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{970D26AC-17CD-4B74-AF42-783B2E8748D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
