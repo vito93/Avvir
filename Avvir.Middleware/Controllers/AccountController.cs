@@ -12,17 +12,21 @@ namespace Avvir.Middleware.Controllers
     public class AccountController : ApiController
     {
         [HttpPost]
-        public void RegisterAccount()
+        public HttpResponseMessage RegisterAccount()
         {
             var db = new AvvirModel();
             var account = new Account();
 
             //insert logic
-            
+
+            var result = new HttpResponseMessage();
+
+            return result;
+
         }
 
         [HttpPatch]
-        public void UpdateAccount([FromUri] string UIN)
+        public HttpResponseMessage UpdateAccount([FromUri] string UIN)
         {
             var db = new AvvirModel();
             var account = db.Account.FirstOrDefault(a => a.UIN == UIN);
@@ -31,6 +35,10 @@ namespace Avvir.Middleware.Controllers
             {
                 //update logic
             }
+
+            var result = new HttpResponseMessage();
+
+            return result;
 
         }
     }
