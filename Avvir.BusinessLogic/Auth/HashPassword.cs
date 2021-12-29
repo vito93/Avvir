@@ -11,7 +11,7 @@ using BcryptNet = BCrypt.Net.BCrypt;
 
 namespace Avvir.BusinessLogic.Auth
 {
-    class HashPassword : ICallabaleBL
+    public class HashPassword : ICallabaleBL
     {
         public IResult Result { get; }
         private IResult _result;

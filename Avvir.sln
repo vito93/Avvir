@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avvir.Middleware", "Avvir.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avvir.BusinessLogic", "Avvir.BusinessLogic\Avvir.BusinessLogic.csproj", "{F233F94A-C93C-4CF4-803F-D392FC112109}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avvir.UnitTest.BusinessLogic", "Avvir.UnitTest.BusinessLogic\Avvir.UnitTest.BusinessLogic.csproj", "{B87F34B3-C122-40A7-87B7-D986B59336F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{F233F94A-C93C-4CF4-803F-D392FC112109}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F233F94A-C93C-4CF4-803F-D392FC112109}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F233F94A-C93C-4CF4-803F-D392FC112109}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B87F34B3-C122-40A7-87B7-D986B59336F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B87F34B3-C122-40A7-87B7-D986B59336F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B87F34B3-C122-40A7-87B7-D986B59336F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B87F34B3-C122-40A7-87B7-D986B59336F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
