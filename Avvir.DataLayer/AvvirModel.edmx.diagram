@@ -18,6 +18,8 @@
         <AssociationConnector Association="AvvirEntities.FK_UserGroupRole_Account" ManuallyRouted="false" />
         <AssociationConnector Association="AvvirEntities.FK_GroupDict_GroupType" ManuallyRouted="false" />
         <AssociationConnector Association="AvvirEntities.FK_UserGroupRole_GroupDict" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AvvirEntities.Token" Width="1.5" PointX="3" PointY="11.125" />
+        <AssociationConnector Association="AvvirEntities.FK_Token_Account1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище AvvirEntities" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище AvvirEntities" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="GUID" />
@@ -12,6 +12,7 @@
           <Property Name="GUID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UIN" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="PasswordHash" Type="char" MaxLength="60" Nullable="false" />
         </EntityType>
         <EntityType Name="ContactList">
           <Key>
@@ -45,6 +46,14 @@
           <Property Name="AuthorGUID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ReceiverGUID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="MessageBody" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Token">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AccountGUID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CreateDate" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="UserGroupRole">
@@ -116,6 +125,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Token_Account1">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Token" Type="Self.Token" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="Token">
+              <PropertyRef Name="AccountGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserGroupRole_Account">
           <End Role="Account" Type="Self.Account" Multiplicity="1" />
           <End Role="UserGroupRole" Type="Self.UserGroupRole" Multiplicity="*" />
@@ -140,12 +161,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetPasswordHashByToken" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="uniqueidentifier">
+          <Parameter Name="token" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="VerifyToken" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+          <Parameter Name="token" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <EntityContainer Name="Хранилище AvvirEntitiesContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContactList" EntityType="Self.ContactList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupDict" EntityType="Self.GroupDict" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupType" EntityType="Self.GroupType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Token" EntityType="Self.Token" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroupRole" EntityType="Self.UserGroupRole" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Author" Association="Self.FK_Author">
             <End Role="Account" EntitySet="Account" />
@@ -167,6 +195,10 @@
             <End Role="Account" EntitySet="Account" />
             <End Role="Message" EntitySet="Message" />
           </AssociationSet>
+          <AssociationSet Name="FK_Token_Account1" Association="Self.FK_Token_Account1">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Token" EntitySet="Token" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserGroupRole_Account" Association="Self.FK_UserGroupRole_Account">
             <End Role="Account" EntitySet="Account" />
             <End Role="UserGroupRole" EntitySet="UserGroupRole" />
@@ -176,8 +208,7 @@
             <End Role="UserGroupRole" EntitySet="UserGroupRole" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AvvirEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -193,6 +224,8 @@
           <NavigationProperty Name="ContactList1" Relationship="Self.FK_ContactList_Account_Owner" FromRole="Account" ToRole="ContactList" />
           <NavigationProperty Name="Message1" Relationship="Self.FK_Receiver" FromRole="Account" ToRole="Message" />
           <NavigationProperty Name="UserGroupRole" Relationship="Self.FK_UserGroupRole_Account" FromRole="Account" ToRole="UserGroupRole" />
+          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Token" Relationship="AvvirEntities.FK_Token_Account1" FromRole="Account" ToRole="Token" />
         </EntityType>
         <EntityType Name="ContactList">
           <Key>
@@ -365,7 +398,33 @@
             <End Role="GroupDict" EntitySet="GroupDict" />
             <End Role="UserGroupRole" EntitySet="UserGroupRole" />
           </AssociationSet>
+          <EntitySet Name="Token" EntityType="AvvirEntities.Token" />
+          <AssociationSet Name="FK_Token_Account1" Association="AvvirEntities.FK_Token_Account1">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Token" EntitySet="Token" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Token">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="AccountGUID" Type="Guid" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Account" Relationship="AvvirEntities.FK_Token_Account1" FromRole="Token" ToRole="Account" />
+        </EntityType>
+        <Association Name="FK_Token_Account1">
+          <End Type="AvvirEntities.Account" Role="Account" Multiplicity="1" />
+          <End Type="AvvirEntities.Token" Role="Token" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="Token">
+              <PropertyRef Name="AccountGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -375,6 +434,7 @@
           <EntitySetMapping Name="Account">
             <EntityTypeMapping TypeName="AvvirEntities.Account">
               <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
                 <ScalarProperty Name="GUID" ColumnName="GUID" />
                 <ScalarProperty Name="UIN" ColumnName="UIN" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -426,6 +486,15 @@
                 <ScalarProperty Name="AccountGUID" ColumnName="AccountGUID" />
                 <ScalarProperty Name="GroupGUID" ColumnName="GroupGUID" />
                 <ScalarProperty Name="GroupRoleGUID" ColumnName="GroupRoleGUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Token">
+            <EntityTypeMapping TypeName="AvvirEntities.Token">
+              <MappingFragment StoreEntitySet="Token">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="AccountGUID" ColumnName="AccountGUID" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

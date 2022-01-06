@@ -31,5 +31,6 @@ namespace Avvir.DataLayer
         public virtual DbSet<GroupType> GroupType { get; set; }
         public virtual DbSet<Message> Message { get; set; }
         public virtual DbSet<UserGroupRole> UserGroupRole { get; set; }
+        public virtual DbSet<Token> Token { get; set; }
     }
 }
