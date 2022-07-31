@@ -1,0 +1,2 @@
+Для восстановления пакетов Nuget запустить Visual Studio -> Package Manger Console команду Update-Package -Reinstall
+либо при отображении информационного сообщения об отсутствии пакетов нажать restore 

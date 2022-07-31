@@ -22,7 +22,6 @@ namespace Avvir.DataLayer
             this.ContactList1 = new HashSet<ContactList>();
             this.Message1 = new HashSet<Message>();
             this.UserGroupRole = new HashSet<UserGroupRole>();
-            this.Token = new HashSet<Token>();
         }
     
         public System.Guid GUID { get; set; }
@@ -40,7 +39,5 @@ namespace Avvir.DataLayer
         public virtual ICollection<Message> Message1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserGroupRole> UserGroupRole { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Token> Token { get; set; }
     }
 }
