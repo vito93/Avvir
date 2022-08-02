@@ -23,7 +23,7 @@
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
     <TargetDatabase>AvvirDatabase</TargetDatabase>
-    <Containment>Partial</Containment>
+    <Containment>None</Containment>
     <PermissionSet>UNSAFE</PermissionSet>
     <AssemblyOwner>Victor Klein</AssemblyOwner>
     <TargetFrameworkProfile />
