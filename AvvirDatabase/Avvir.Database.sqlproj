@@ -66,6 +66,7 @@
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
     <Folder Include="CompareFiles" />
+    <Folder Include="Seed" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Message.sql" />
@@ -74,6 +75,9 @@
     <Build Include="dbo\Tables\GroupType.sql" />
     <Build Include="dbo\Tables\GroupDict.sql" />
     <Build Include="dbo\Tables\ContactList.sql" />
+    <None Include="Seed\GroupTypes.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="CompareFiles\LocalhostCompare.scmp" />
