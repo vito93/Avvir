@@ -78,6 +78,9 @@
     <None Include="Seed\GroupTypes.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Build Include="dbo\Tables\GroupRole.sql" />
+    <Build Include="dbo\Tables\AttachmentHeader.sql" />
+    <Build Include="dbo\Tables\AttachmentBody.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CompareFiles\LocalhostCompare.scmp" />
