@@ -67,6 +67,7 @@
     <Folder Include="dbo\Tables\" />
     <Folder Include="CompareFiles" />
     <Folder Include="Seed" />
+    <Folder Include="Storage\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Message.sql" />
@@ -81,6 +82,7 @@
     <Build Include="dbo\Tables\GroupRole.sql" />
     <Build Include="dbo\Tables\AttachmentHeader.sql" />
     <Build Include="dbo\Tables\AttachmentBody.sql" />
+    <Build Include="Storage\UserAttachments.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CompareFiles\LocalhostCompare.scmp" />
