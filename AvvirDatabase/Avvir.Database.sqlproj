@@ -85,6 +85,8 @@
     <Build Include="dbo\Tables\AttachmentBody.sql" />
     <Build Include="Storage\UserAttachments.sql" />
     <Build Include="dbo\Stored Procedures\SaveFile.sql" />
+    <Build Include="dbo\Tables\Message2Account.sql" />
+    <Build Include="dbo\Stored Procedures\SaveMessage.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CompareFiles\LocalhostCompare.scmp" />
