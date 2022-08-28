@@ -1,4 +1,5 @@
 ﻿
+
 -- =============================================
 -- Author:		Victor Klein
 -- Create date: 20.08.2022
@@ -19,8 +20,6 @@ BEGIN
 
 
 	DECLARE @checkpoint nvarchar(32) = isnull(object_name(@@procid), replace(newid(), '-', ''));
-    DECLARE @fileCount int
-	DECLARE @headerGUID uniqueidentifier
 
 	begin try
         begin transaction

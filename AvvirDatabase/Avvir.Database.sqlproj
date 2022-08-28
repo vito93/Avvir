@@ -87,6 +87,17 @@
     <Build Include="dbo\Stored Procedures\SaveFile.sql" />
     <Build Include="dbo\Tables\Message2Account.sql" />
     <Build Include="dbo\Stored Procedures\SaveMessage.sql" />
+    <Build Include="dbo\Tables\ContactListRequest.sql" />
+    <Build Include="dbo\Tables\AspNetUserTokens.sql" />
+    <Build Include="dbo\Tables\AspNetUsers.sql" />
+    <Build Include="dbo\Tables\AspNetUserRoles.sql" />
+    <Build Include="dbo\Tables\AspNetUserLogins.sql" />
+    <Build Include="dbo\Tables\AspNetUserClaims.sql" />
+    <Build Include="dbo\Tables\AspNetRoles.sql" />
+    <Build Include="dbo\Tables\AspNetRoleClaims.sql" />
+    <Build Include="dbo\Tables\__EFMigrationsHistory.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateContactListRequest.sql" />
+    <Build Include="dbo\Stored Procedures\SaveContactListRequest.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CompareFiles\LocalhostCompare.scmp" />
