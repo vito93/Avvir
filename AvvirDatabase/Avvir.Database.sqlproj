@@ -98,6 +98,8 @@
     <Build Include="dbo\Tables\__EFMigrationsHistory.sql" />
     <Build Include="dbo\Stored Procedures\UpdateContactListRequest.sql" />
     <Build Include="dbo\Stored Procedures\SaveContactListRequest.sql" />
+    <Build Include="dbo\Tables\Comment.sql" />
+    <Build Include="dbo\Stored Procedures\SaveComment.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CompareFiles\LocalhostCompare.scmp" />
