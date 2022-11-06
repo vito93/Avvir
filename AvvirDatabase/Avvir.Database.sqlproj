@@ -69,6 +69,7 @@
     <Folder Include="Seed" />
     <Folder Include="Storage\" />
     <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Message.sql" />
@@ -103,5 +104,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CompareFiles\LocalhostCompare.scmp" />
+    <None Include="Scripts\ScriptDatabaseMailProfiles.sql" />
   </ItemGroup>
 </Project>
