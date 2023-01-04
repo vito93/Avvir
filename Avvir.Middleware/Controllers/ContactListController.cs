@@ -33,5 +33,11 @@ namespace Avvir.Middleware.Controllers
 
             return result;
         }
+
+        [JwtAuthentication]
+        public string Get()
+        {
+            return "value";
+        }
     }
 }
