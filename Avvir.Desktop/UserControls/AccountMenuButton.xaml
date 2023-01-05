@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="Avvir.Desktop.UserControls.AccountMenuButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Name="accountMenu">
+    <Button>
+        <Grid>
+            <Border HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="2.5" Background="#ffffff"
+                    Margin="0 -10" CornerRadius="0 3 3 0" Visibility="Collapsed" />
+            <Border CornerRadius="30" Width="25" Height="25">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="Red" Offset="0"/>
+                        <GradientStop Color="MistyRose" Offset="0.8"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <TextBlock Text="A" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold" Margin="0 0 0 2" />
+            </Border>
+        </Grid>
+    </Button>
+</UserControl>
