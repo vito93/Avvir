@@ -1,8 +1,0 @@
-﻿CREATE TABLE [dbo].[Message2Account] (
-    [GUID]        UNIQUEIDENTIFIER CONSTRAINT [DF_Message2Account_GUID] DEFAULT (newsequentialid()) NOT NULL,
-    [MessageGUID] UNIQUEIDENTIFIER NOT NULL,
-    [AccountGUID] UNIQUEIDENTIFIER NOT NULL,
-    [Viewed]      DATETIME2 (7)    NULL,
-    CONSTRAINT [PK_Message2Account] PRIMARY KEY CLUSTERED ([GUID] ASC)
-);
-

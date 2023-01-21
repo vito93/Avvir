@@ -1,8 +1,0 @@
-﻿CREATE TABLE [dbo].[Token] (
-    [GUID]        UNIQUEIDENTIFIER CONSTRAINT [DF_Token_GUID] DEFAULT (newsequentialid()) NOT NULL,
-    [AccountGUID] UNIQUEIDENTIFIER NOT NULL,
-    [CreateDate]  DATETIME2 (7)    NOT NULL,
-    CONSTRAINT [PK_Token] PRIMARY KEY CLUSTERED ([GUID] ASC),
-    CONSTRAINT [FK_Token_Account1] FOREIGN KEY ([AccountGUID]) REFERENCES [dbo].[Account] ([GUID])
-);
-
