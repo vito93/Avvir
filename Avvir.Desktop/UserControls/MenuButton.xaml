@@ -8,16 +8,16 @@
     
     <Grid Margin="0 -17">
         <Grid HorizontalAlignment="Right" Width="20" Height="85" Panel.ZIndex="1"
-              Visibility="Visible">
+              Visibility="{Binding ElementName=btn,Path=Tag}">
 
             <Path Fill="#f8f7fc" Stretch="Fill" Data="M0 20.7C15 20 26.5 12 27 0V87.6C26 75 15.1 67.5 0 67V24Z" />
         </Grid>
 
         <Button Name="btn" Style="{StaticResource menuButton}">
             <StackPanel Orientation="Horizontal">
-                <Icon:PackIconMaterial Kind="Abacus" Style="{StaticResource menuButtonIcon}" />
+                <Icon:PackIconMaterial Kind="{Binding ElementName=menuButton,Path=Icon}" Style="{StaticResource menuButtonIcon}" />
 
-                <TextBlock Text="Hi Avvir" Style="{StaticResource menuButtonText}" />
+                <TextBlock Text="{Binding ElementName=menuButton,Path=Title}" Style="{StaticResource menuButtonText}" />
             </StackPanel>
             
         </Button>
