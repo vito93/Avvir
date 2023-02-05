@@ -75,5 +75,24 @@
 
             </Grid>
         </Border>
+        <!--Top Section-->
+        <Grid Grid.ColumnSpan="2" Margin="40 30">
+            <!--Search TextBox-->
+            <Grid Width="500" HorizontalAlignment="Left">
+                <ComboBox Style="{StaticResource ComboBoxStyleSearch}" HorizontalAlignment="Left" Margin="3 0 0 0" Panel.ZIndex="1">
+                    <ComboBoxItem Content="All" IsSelected="True"/>
+                    <ComboBoxItem Content="Categoty 1" IsSelected="True"/>
+                    <ComboBoxItem Content="Categoty 2" IsSelected="True"/>
+                    <ComboBoxItem Content="Categoty 3" IsSelected="True"/>
+                </ComboBox>
+
+                <Rectangle Width="1" Fill="#e9e9e9" Panel.ZIndex="2" HorizontalAlignment="Left" Margin="130 19 0 19"/>
+
+                <TextBlock Margin="150 0 20 0" VerticalAlignment="Center" Foreground="#868686" Panel.ZIndex="1"
+                           IsHitTestVisible="False" Text="Search text ..." Visibility="Visible"/>
+
+                <TextBox x:Name="txBoxSearch"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
