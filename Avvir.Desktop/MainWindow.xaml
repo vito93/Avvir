@@ -5,6 +5,11 @@
         xmlns:uc="clr-namespace:Avvir.Desktop.UserControls"
         Height="830" Width="1250" ResizeMode="NoResize" Background="Transparent"
         AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisible"/>
+    </Window.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="55"/>
@@ -76,7 +81,7 @@
             </Grid>
         </Border>
         <!--Top Section-->
-        <Grid Grid.ColumnSpan="2" Margin="40 30">
+        <Grid Grid.Column="2" Grid.ColumnSpan="2" Margin="40 30">
             <!--Search TextBox-->
             <Grid Width="500" HorizontalAlignment="Left">
                 <ComboBox Style="{StaticResource ComboBoxStyleSearch}" HorizontalAlignment="Left" Margin="3 0 0 0" Panel.ZIndex="1">
@@ -89,9 +94,14 @@
                 <Rectangle Width="1" Fill="#e9e9e9" Panel.ZIndex="2" HorizontalAlignment="Left" Margin="130 19 0 19"/>
 
                 <TextBlock Margin="150 0 20 0" VerticalAlignment="Center" Foreground="#868686" Panel.ZIndex="1"
-                           IsHitTestVisible="False" Text="Search text ..." Visibility="Visible"/>
+                           IsHitTestVisible="False" Text="Search text ..."
+                           Visibility="{Binding ElementName=txBoxSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVisible}}"/>
 
-                <TextBox x:Name="txBoxSearch"/>
+                <TextBox x:Name="txBoxSearch" Style="{StaticResource searchTextBox}"/>
+
+                <Button HorizontalAlignment="Right" Margin="0 0 7 0" Style="{StaticResource btnTexBoxSearch}">
+                    <Icon:PackIconMaterial Kind="Magnify" Width="15" Foreground="#7c7c7c"/>
+                </Button>
             </Grid>
         </Grid>
     </Grid>
