@@ -20,4 +20,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Avvir.BusinessLogic\Avvir.BusinessLogic.csproj" />
+    <ProjectReference Include="..\Avvir.DataLayer\Avvir.DataLayer.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -67,9 +67,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.cs">
-      <DependentUpon>AvvirModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="AvvirModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -84,21 +81,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AvvirModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="ContactList.cs">
-      <DependentUpon>AvvirModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GroupDict.cs">
-      <DependentUpon>AvvirModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="GroupType.cs">
-      <DependentUpon>AvvirModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Message.cs">
-      <DependentUpon>AvvirModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserGroupRole.cs">
-      <DependentUpon>AvvirModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

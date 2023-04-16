@@ -20,6 +20,20 @@
         <AssociationConnector Association="AvvirEntities.FK_UserGroupRole_GroupDict" ManuallyRouted="false" />
         <EntityTypeShape EntityType="AvvirEntities.Token" Width="1.5" PointX="3" PointY="11.125" />
         <AssociationConnector Association="AvvirEntities.FK_Token_Account1" />
+        <EntityTypeShape EntityType="AvvirEntities.AccountAuthorization" Width="1.5" PointX="3" PointY="14.125" />
+        <EntityTypeShape EntityType="AvvirEntities.AccountConfirmationToken" Width="1.5" PointX="3" PointY="16.875" />
+        <EntityTypeShape EntityType="AvvirEntities.AttachmentBody" Width="1.5" PointX="8.625" PointY="1" />
+        <EntityTypeShape EntityType="AvvirEntities.AttachmentHeader" Width="1.5" PointX="6.375" PointY="0.875" />
+        <EntityTypeShape EntityType="AvvirEntities.AuthorizationToken" Width="1.5" PointX="8.375" PointY="4.75" />
+        <EntityTypeShape EntityType="AvvirEntities.Comment" Width="1.5" PointX="5.25" PointY="8.75" />
+        <EntityTypeShape EntityType="AvvirEntities.ContactListRequest" Width="1.5" PointX="8.375" PointY="7.75" />
+        <EntityTypeShape EntityType="AvvirEntities.GroupRole" Width="1.5" PointX="10.375" PointY="4.75" />
+        <EntityTypeShape EntityType="AvvirEntities.Message2Account" Width="1.5" PointX="10.375" PointY="7.75" />
+        <AssociationConnector Association="AvvirEntities.FK_AccountAuthorization_Account" />
+        <AssociationConnector Association="AvvirEntities.FK_AccountConfirmationToken_Account" />
+        <AssociationConnector Association="AvvirEntities.FK_Comment_Account" />
+        <AssociationConnector Association="AvvirEntities.FK_AttachmentBody_AttachmentHeader" />
+        <AssociationConnector Association="AvvirEntities.FK_Comment_Message" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
