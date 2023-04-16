@@ -9,12 +9,13 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Avvir.DataLayer</RootNamespace>
     <AssemblyName>Avvir.DataLayer</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -40,11 +41,12 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="AvvirModel.edmx">
+    <EntityDeploy Include="Database\AvvirModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AvvirModel.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Avvir.DataLayer</CustomToolNamespace>
     </EntityDeploy>
-    <None Include="AvvirModel.edmx.diagram">
+    <None Include="Database\AvvirModel.edmx.diagram">
       <DependentUpon>AvvirModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -67,29 +69,29 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AvvirModel.Context.cs">
+    <Compile Include="Database\AvvirModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AvvirModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="AvvirModel.cs">
+    <Compile Include="Database\AvvirModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AvvirModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="AvvirModel.Designer.cs">
+    <Compile Include="Database\AvvirModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AvvirModel.edmx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AvvirModel.Context.tt">
+    <Content Include="Database\AvvirModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>AvvirModel.edmx</DependentUpon>
       <LastGenOutput>AvvirModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="AvvirModel.tt">
+    <Content Include="Database\AvvirModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>AvvirModel.edmx</DependentUpon>
       <LastGenOutput>AvvirModel.cs</LastGenOutput>
