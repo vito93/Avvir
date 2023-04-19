@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using Avvir.DataLayer.Database;
 
 
 namespace Avvir.BusinessLogic.Auth
@@ -33,7 +34,10 @@ namespace Avvir.BusinessLogic.Auth
 
                 if (hp.Result.Code == 0)
                 {
-                    //using(var db = new )
+                    using(var db = new AvvirModel())
+                    {
+                        
+                    }
                 }
                 else throw new Exception(hp.Result.Message);
             }

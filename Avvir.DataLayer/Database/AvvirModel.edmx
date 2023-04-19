@@ -391,39 +391,21 @@
           <Property Name="GUID" Type="Guid" Nullable="false" />
           <Property Name="UIN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Message" Relationship="Self.FK_Author" FromRole="Account" ToRole="Message" />
-          <NavigationProperty Name="ContactList" Relationship="Self.FK_ContactList_Account_InList" FromRole="Account" ToRole="ContactList" />
-          <NavigationProperty Name="ContactList1" Relationship="Self.FK_ContactList_Account_Owner" FromRole="Account" ToRole="ContactList" />
-          <NavigationProperty Name="Message1" Relationship="Self.FK_Receiver" FromRole="Account" ToRole="Message" />
           <NavigationProperty Name="UserGroupRole" Relationship="Self.FK_UserGroupRole_Account" FromRole="Account" ToRole="UserGroupRole" />
           <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="60" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="Token" Relationship="AvvirEntities.FK_Token_Account1" FromRole="Account" ToRole="Token" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="UIN_Bigint" Type="Int64" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="AccountAuthorization" Relationship="AvvirEntities.FK_AccountAuthorization_Account" FromRole="Account" ToRole="AccountAuthorization" />
           <NavigationProperty Name="AccountConfirmationToken" Relationship="AvvirEntities.FK_AccountConfirmationToken_Account" FromRole="Account" ToRole="AccountConfirmationToken" />
+          <NavigationProperty Name="Message" Relationship="AvvirEntities.FK_Author" FromRole="Account" ToRole="Message" />
           <NavigationProperty Name="Comment" Relationship="AvvirEntities.FK_Comment_Account" FromRole="Account" ToRole="Comment" />
-        </EntityType>
-        <EntityType Name="ContactList">
-          <Key>
-            <PropertyRef Name="GUID" />
-          </Key>
-          <Property Name="GUID" Type="Guid" Nullable="false" />
-          <Property Name="ContactListOwner" Type="Guid" Nullable="false" />
-          <Property Name="AccountInListGUID" Type="Guid" Nullable="false" />
-          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Account" Relationship="Self.FK_ContactList_Account_InList" FromRole="ContactList" ToRole="Account" />
-          <NavigationProperty Name="Account1" Relationship="Self.FK_ContactList_Account_Owner" FromRole="ContactList" ToRole="Account" />
-          <Property Name="MainUserGUID" Type="Guid" Nullable="false" />
-          <Property Name="SecondaryUserGUID" Type="Guid" Nullable="false" />
-          <Property Name="ContactStatus" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Message1" Relationship="AvvirEntities.FK_Receiver" FromRole="Account" ToRole="Message" />
         </EntityType>
         <EntityType Name="GroupDict">
           <Key>
             <PropertyRef Name="GUID" />
           </Key>
           <Property Name="GUID" Type="Guid" Nullable="false" />
-          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="GroupTypeGUID" Type="Guid" Nullable="false" />
           <NavigationProperty Name="GroupType" Relationship="Self.FK_GroupDict_GroupType" FromRole="GroupDict" ToRole="GroupType" />
           <NavigationProperty Name="UserGroupRole" Relationship="Self.FK_UserGroupRole_GroupDict" FromRole="GroupDict" ToRole="UserGroupRole" />
@@ -438,23 +420,6 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="GroupDict" Relationship="Self.FK_GroupDict_GroupType" FromRole="GroupType" ToRole="GroupDict" />
         </EntityType>
-        <EntityType Name="Message">
-          <Key>
-            <PropertyRef Name="GUID" />
-          </Key>
-          <Property Name="GUID" Type="Guid" Nullable="false" />
-          <Property Name="AuthorGUID" Type="Guid" Nullable="false" />
-          <Property Name="ReceiverGUID" Type="Guid" />
-          <Property Name="MessageBody" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="Account" Relationship="Self.FK_Author" FromRole="Message" ToRole="Account" />
-          <NavigationProperty Name="Account1" Relationship="Self.FK_Receiver" FromRole="Message" ToRole="Account" />
-          <Property Name="GroupGUID" Type="Guid" />
-          <Property Name="ReplyMessageGUID" Type="Guid" />
-          <Property Name="Created" Type="DateTime" Precision="3" />
-          <Property Name="Edited" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Comment" Relationship="AvvirEntities.FK_Comment_Message" FromRole="Message" ToRole="Comment" />
-        </EntityType>
         <EntityType Name="UserGroupRole">
           <Key>
             <PropertyRef Name="GUID" />
@@ -466,54 +431,6 @@
           <NavigationProperty Name="Account" Relationship="Self.FK_UserGroupRole_Account" FromRole="UserGroupRole" ToRole="Account" />
           <NavigationProperty Name="GroupDict" Relationship="Self.FK_UserGroupRole_GroupDict" FromRole="UserGroupRole" ToRole="GroupDict" />
         </EntityType>
-        <Association Name="FK_Author">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="Message" Type="Self.Message" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="GUID" />
-            </Principal>
-            <Dependent Role="Message">
-              <PropertyRef Name="AuthorGUID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ContactList_Account_InList">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="ContactList" Type="Self.ContactList" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="GUID" />
-            </Principal>
-            <Dependent Role="ContactList">
-              <PropertyRef Name="AccountInListGUID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ContactList_Account_Owner">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="ContactList" Type="Self.ContactList" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="GUID" />
-            </Principal>
-            <Dependent Role="ContactList">
-              <PropertyRef Name="ContactListOwner" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Receiver">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="Message" Type="Self.Message" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="GUID" />
-            </Principal>
-            <Dependent Role="Message">
-              <PropertyRef Name="ReceiverGUID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UserGroupRole_Account">
           <End Role="Account" Type="Self.Account" Multiplicity="1" />
           <End Role="UserGroupRole" Type="Self.UserGroupRole" Multiplicity="*" />
@@ -552,27 +469,9 @@
         </Association>
         <EntityContainer Name="AvvirModel" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Account" EntityType="Self.Account" />
-          <EntitySet Name="ContactList" EntityType="Self.ContactList" />
           <EntitySet Name="GroupDict" EntityType="Self.GroupDict" />
           <EntitySet Name="GroupType" EntityType="Self.GroupType" />
-          <EntitySet Name="Message" EntityType="Self.Message" />
           <EntitySet Name="UserGroupRole" EntityType="Self.UserGroupRole" />
-          <AssociationSet Name="FK_Author" Association="Self.FK_Author">
-            <End Role="Account" EntitySet="Account" />
-            <End Role="Message" EntitySet="Message" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ContactList_Account_InList" Association="Self.FK_ContactList_Account_InList">
-            <End Role="Account" EntitySet="Account" />
-            <End Role="ContactList" EntitySet="ContactList" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ContactList_Account_Owner" Association="Self.FK_ContactList_Account_Owner">
-            <End Role="Account" EntitySet="Account" />
-            <End Role="ContactList" EntitySet="ContactList" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Receiver" Association="Self.FK_Receiver">
-            <End Role="Account" EntitySet="Account" />
-            <End Role="Message" EntitySet="Message" />
-          </AssociationSet>
           <AssociationSet Name="FK_UserGroupRole_Account" Association="Self.FK_UserGroupRole_Account">
             <End Role="Account" EntitySet="Account" />
             <End Role="UserGroupRole" EntitySet="UserGroupRole" />
@@ -585,17 +484,11 @@
             <End Role="GroupDict" EntitySet="GroupDict" />
             <End Role="UserGroupRole" EntitySet="UserGroupRole" />
           </AssociationSet>
-          <EntitySet Name="Token" EntityType="AvvirEntities.Token" />
-          <AssociationSet Name="FK_Token_Account1" Association="AvvirEntities.FK_Token_Account1">
-            <End Role="Account" EntitySet="Account" />
-            <End Role="Token" EntitySet="Token" />
-          </AssociationSet>
           <EntitySet Name="AccountAuthorization" EntityType="AvvirEntities.AccountAuthorization" />
           <EntitySet Name="AccountConfirmationToken" EntityType="AvvirEntities.AccountConfirmationToken" />
           <EntitySet Name="AttachmentBody" EntityType="AvvirEntities.AttachmentBody" />
           <EntitySet Name="AttachmentHeader" EntityType="AvvirEntities.AttachmentHeader" />
           <EntitySet Name="AuthorizationToken" EntityType="AvvirEntities.AuthorizationToken" />
-          <EntitySet Name="Comment" EntityType="AvvirEntities.Comment" />
           <EntitySet Name="ContactListRequest" EntityType="AvvirEntities.ContactListRequest" />
           <EntitySet Name="GroupRole" EntityType="AvvirEntities.GroupRole" />
           <EntitySet Name="Message2Account" EntityType="AvvirEntities.Message2Account" />
@@ -607,17 +500,9 @@
             <End Role="Account" EntitySet="Account" />
             <End Role="AccountConfirmationToken" EntitySet="AccountConfirmationToken" />
           </AssociationSet>
-          <AssociationSet Name="FK_Comment_Account" Association="AvvirEntities.FK_Comment_Account">
-            <End Role="Account" EntitySet="Account" />
-            <End Role="Comment" EntitySet="Comment" />
-          </AssociationSet>
           <AssociationSet Name="FK_AttachmentBody_AttachmentHeader" Association="AvvirEntities.FK_AttachmentBody_AttachmentHeader">
             <End Role="AttachmentHeader" EntitySet="AttachmentHeader" />
             <End Role="AttachmentBody" EntitySet="AttachmentBody" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Comment_Message" Association="AvvirEntities.FK_Comment_Message">
-            <End Role="Message" EntitySet="Message" />
-            <End Role="Comment" EntitySet="Comment" />
           </AssociationSet>
           <FunctionImport Name="AssignUserRole">
             <Parameter Name="AccountGUID" Mode="In" Type="Guid" />
@@ -639,14 +524,14 @@
             <Parameter Name="Email" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetAuthrizationToken" ReturnType="Collection(Guid)">
-            <Parameter Name="AccountGUID" Mode="In" Type="Guid" />
+          <Parameter Name="AccountGUID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetChatMessages">
             <Parameter Name="Account1GUID" Mode="In" Type="Guid" />
             <Parameter Name="Account2GUID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="GetGroupMessages">
-            <Parameter Name="GroupGUID" Mode="In" Type="Guid" />
+          <Parameter Name="GroupGUID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="SaveComment">
             <Parameter Name="AuthorGUID" Mode="In" Type="Guid" />
@@ -671,34 +556,32 @@
             <Parameter Name="MessageBody" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SendUserConfirmationMail">
-            <Parameter Name="AccountGUID" Mode="In" Type="Guid" />
+          <Parameter Name="AccountGUID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="UpdateContactListRequest">
             <Parameter Name="RequestGUID" Mode="In" Type="Guid" />
             <Parameter Name="NewStatus" Mode="In" Type="Byte" />
           </FunctionImport>
+          <EntitySet Name="Comment" EntityType="AvvirEntities.Comment" />
+          <EntitySet Name="ContactList" EntityType="AvvirEntities.ContactList" />
+          <EntitySet Name="Message" EntityType="AvvirEntities.Message" />
+          <AssociationSet Name="FK_Author" Association="AvvirEntities.FK_Author">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Account" Association="AvvirEntities.FK_Comment_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receiver" Association="AvvirEntities.FK_Receiver">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Message" Association="AvvirEntities.FK_Comment_Message">
+            <End Role="Message" EntitySet="Message" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Token">
-          <Key>
-            <PropertyRef Name="GUID" />
-          </Key>
-          <Property Name="GUID" Type="Guid" Nullable="false" />
-          <Property Name="AccountGUID" Type="Guid" Nullable="false" />
-          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="7" />
-          <NavigationProperty Name="Account" Relationship="AvvirEntities.FK_Token_Account1" FromRole="Token" ToRole="Account" />
-        </EntityType>
-        <Association Name="FK_Token_Account1">
-          <End Type="AvvirEntities.Account" Role="Account" Multiplicity="1" />
-          <End Type="AvvirEntities.Token" Role="Token" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="GUID" />
-            </Principal>
-            <Dependent Role="Token">
-              <PropertyRef Name="AccountGUID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="AccountAuthorization">
           <Key>
             <PropertyRef Name="GUID" />
@@ -747,18 +630,6 @@
           <Property Name="GUID" Type="Guid" Nullable="false" />
           <Property Name="AccountGUID" Type="Guid" Nullable="false" />
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="7" />
-        </EntityType>
-        <EntityType Name="Comment">
-          <Key>
-            <PropertyRef Name="GUID" />
-          </Key>
-          <Property Name="GUID" Type="Guid" Nullable="false" />
-          <Property Name="MessageGUID" Type="Guid" Nullable="false" />
-          <Property Name="AuthorGUID" Type="Guid" Nullable="false" />
-          <Property Name="Body" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Account" Relationship="AvvirEntities.FK_Comment_Account" FromRole="Comment" ToRole="Account" />
-          <NavigationProperty Name="Message" Relationship="AvvirEntities.FK_Comment_Message" FromRole="Comment" ToRole="Message" />
         </EntityType>
         <EntityType Name="ContactListRequest">
           <Key>
@@ -811,6 +682,67 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_AttachmentBody_AttachmentHeader">
+          <End Type="AvvirEntities.AttachmentHeader" Role="AttachmentHeader" Multiplicity="1" />
+          <End Type="AvvirEntities.AttachmentBody" Role="AttachmentBody" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AttachmentHeader">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="AttachmentBody">
+              <PropertyRef Name="HeaderGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="MessageGUID" Type="Guid" Nullable="false" />
+          <Property Name="AuthorGUID" Type="Guid" Nullable="false" />
+          <Property Name="Body" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Account" Relationship="AvvirEntities.FK_Comment_Account" FromRole="Comment" ToRole="Account" />
+          <NavigationProperty Name="Message" Relationship="AvvirEntities.FK_Comment_Message" FromRole="Comment" ToRole="Message" />
+        </EntityType>
+        <EntityType Name="ContactList">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="MainUserGUID" Type="Guid" Nullable="false" />
+          <Property Name="SecondaryUserGUID" Type="Guid" Nullable="false" />
+          <Property Name="ContactStatus" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="GUID" />
+          </Key>
+          <Property Name="GUID" Type="Guid" Nullable="false" />
+          <Property Name="AuthorGUID" Type="Guid" Nullable="false" />
+          <Property Name="ReceiverGUID" Type="Guid" />
+          <Property Name="MessageBody" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GroupGUID" Type="Guid" />
+          <Property Name="ReplyMessageGUID" Type="Guid" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Edited" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Account" Relationship="AvvirEntities.FK_Author" FromRole="Message" ToRole="Account" />
+          <NavigationProperty Name="Account1" Relationship="AvvirEntities.FK_Receiver" FromRole="Message" ToRole="Account" />
+          <NavigationProperty Name="Comment" Relationship="AvvirEntities.FK_Comment_Message" FromRole="Message" ToRole="Comment" />
+        </EntityType>
+        <Association Name="FK_Author">
+          <End Type="AvvirEntities.Account" Role="Account" Multiplicity="1" />
+          <End Type="AvvirEntities.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="GUID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="AuthorGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Comment_Account">
           <End Type="AvvirEntities.Account" Role="Account" Multiplicity="1" />
           <End Type="AvvirEntities.Comment" Role="Comment" Multiplicity="*" />
@@ -823,15 +755,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_AttachmentBody_AttachmentHeader">
-          <End Type="AvvirEntities.AttachmentHeader" Role="AttachmentHeader" Multiplicity="1" />
-          <End Type="AvvirEntities.AttachmentBody" Role="AttachmentBody" Multiplicity="*" />
+        <Association Name="FK_Receiver">
+          <End Type="AvvirEntities.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="AvvirEntities.Message" Role="Message" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AttachmentHeader">
+            <Principal Role="Account">
               <PropertyRef Name="GUID" />
             </Principal>
-            <Dependent Role="AttachmentBody">
-              <PropertyRef Name="HeaderGUID" />
+            <Dependent Role="Message">
+              <PropertyRef Name="ReceiverGUID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -865,16 +797,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ContactList">
-            <EntityTypeMapping TypeName="AvvirEntities.ContactList">
-              <MappingFragment StoreEntitySet="ContactList">
-                <ScalarProperty Name="ContactStatus" ColumnName="ContactStatus" />
-                <ScalarProperty Name="SecondaryUserGUID" ColumnName="SecondaryUserGUID" />
-                <ScalarProperty Name="MainUserGUID" ColumnName="MainUserGUID" />
-                <ScalarProperty Name="GUID" ColumnName="GUID" />
-                </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="GroupDict">
             <EntityTypeMapping TypeName="AvvirEntities.GroupDict">
               <MappingFragment StoreEntitySet="GroupDict">
@@ -890,20 +812,6 @@
               <MappingFragment StoreEntitySet="GroupType">
                 <ScalarProperty Name="GUID" ColumnName="GUID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Message">
-            <EntityTypeMapping TypeName="AvvirEntities.Message">
-              <MappingFragment StoreEntitySet="Message">
-                <ScalarProperty Name="Edited" ColumnName="Edited" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="ReplyMessageGUID" ColumnName="ReplyMessageGUID" />
-                <ScalarProperty Name="GroupGUID" ColumnName="GroupGUID" />
-                <ScalarProperty Name="GUID" ColumnName="GUID" />
-                <ScalarProperty Name="AuthorGUID" ColumnName="AuthorGUID" />
-                <ScalarProperty Name="ReceiverGUID" ColumnName="ReceiverGUID" />
-                <ScalarProperty Name="MessageBody" ColumnName="MessageBody" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -967,17 +875,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Comment">
-            <EntityTypeMapping TypeName="AvvirEntities.Comment">
-              <MappingFragment StoreEntitySet="Comment">
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="Body" ColumnName="Body" />
-                <ScalarProperty Name="AuthorGUID" ColumnName="AuthorGUID" />
-                <ScalarProperty Name="MessageGUID" ColumnName="MessageGUID" />
-                <ScalarProperty Name="GUID" ColumnName="GUID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ContactListRequest">
             <EntityTypeMapping TypeName="AvvirEntities.ContactListRequest">
               <MappingFragment StoreEntitySet="ContactListRequest">
@@ -1021,6 +918,41 @@
           <FunctionImportMapping FunctionImportName="SaveMessage" FunctionName="Хранилище AvvirEntities.SaveMessage" />
           <FunctionImportMapping FunctionImportName="SendUserConfirmationMail" FunctionName="Хранилище AvvirEntities.SendUserConfirmationMail" />
           <FunctionImportMapping FunctionImportName="UpdateContactListRequest" FunctionName="Хранилище AvvirEntities.UpdateContactListRequest" />
+          <EntitySetMapping Name="Comment">
+            <EntityTypeMapping TypeName="AvvirEntities.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="AuthorGUID" ColumnName="AuthorGUID" />
+                <ScalarProperty Name="MessageGUID" ColumnName="MessageGUID" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactList">
+            <EntityTypeMapping TypeName="AvvirEntities.ContactList">
+              <MappingFragment StoreEntitySet="ContactList">
+                <ScalarProperty Name="ContactStatus" ColumnName="ContactStatus" />
+                <ScalarProperty Name="SecondaryUserGUID" ColumnName="SecondaryUserGUID" />
+                <ScalarProperty Name="MainUserGUID" ColumnName="MainUserGUID" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Message">
+            <EntityTypeMapping TypeName="AvvirEntities.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="Edited" ColumnName="Edited" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ReplyMessageGUID" ColumnName="ReplyMessageGUID" />
+                <ScalarProperty Name="GroupGUID" ColumnName="GroupGUID" />
+                <ScalarProperty Name="MessageBody" ColumnName="MessageBody" />
+                <ScalarProperty Name="ReceiverGUID" ColumnName="ReceiverGUID" />
+                <ScalarProperty Name="AuthorGUID" ColumnName="AuthorGUID" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1029,7 +961,7 @@
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <Connection>
       <DesignerInfoPropertySet>
-        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="CopyToOutputDirectory" />
       </DesignerInfoPropertySet>
     </Connection>
     <Options>

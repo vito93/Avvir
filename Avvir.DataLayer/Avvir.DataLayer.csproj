@@ -44,7 +44,7 @@
     <EntityDeploy Include="Database\AvvirModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AvvirModel.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Avvir.DataLayer</CustomToolNamespace>
+      <CustomToolNamespace>Avvir.DataLayer.Data</CustomToolNamespace>
     </EntityDeploy>
     <None Include="Database\AvvirModel.edmx.diagram">
       <DependentUpon>AvvirModel.edmx</DependentUpon>
@@ -69,6 +69,24 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\Account.cs">
+      <DependentUpon>AvvirModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\AccountAuthorization.cs">
+      <DependentUpon>AvvirModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\AccountConfirmationToken.cs">
+      <DependentUpon>AvvirModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\AttachmentBody.cs">
+      <DependentUpon>AvvirModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\AttachmentHeader.cs">
+      <DependentUpon>AvvirModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\AuthorizationToken.cs">
+      <DependentUpon>AvvirModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\AvvirModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -83,6 +101,33 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AvvirModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Comment.cs">
+      <DependentUpon>AvvirModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ContactList.cs">
+      <DependentUpon>AvvirModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ContactListRequest.cs">
+      <DependentUpon>AvvirModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\GroupDict.cs">
+      <DependentUpon>AvvirModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\GroupRole.cs">
+      <DependentUpon>AvvirModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\GroupType.cs">
+      <DependentUpon>AvvirModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Message.cs">
+      <DependentUpon>AvvirModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Message2Account.cs">
+      <DependentUpon>AvvirModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\UserGroupRole.cs">
+      <DependentUpon>AvvirModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
