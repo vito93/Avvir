@@ -14,7 +14,7 @@ using Avvir.DataLayer.Database;
 
 namespace Avvir.BusinessLogic.Auth
 {
-    internal class Register : ICallabaleBL
+    public class Register : ICallabaleBL
     {
         public IResult Result { get; }
         private IResult _result;
