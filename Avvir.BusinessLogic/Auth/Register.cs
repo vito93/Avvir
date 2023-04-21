@@ -34,9 +34,13 @@ namespace Avvir.BusinessLogic.Auth
 
                 if (hp.Result.Code == 0)
                 {
-                    using(var db = new AvvirModel())
+                    using (var db = new AvvirModel())
                     {
-                        
+                        // Duplicates by email
+                        if (!db.Account.Any(a => a.Email == _model.Email))
+                        {
+                            db.CreateUser(_model.Name, hp.Hash, _model.Name);
+                        }
                     }
                 }
                 else throw new Exception(hp.Result.Message);
