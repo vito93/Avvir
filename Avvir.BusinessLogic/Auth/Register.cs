@@ -10,21 +10,24 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using Avvir.DataLayer.Database;
+using Avvir.BusinessLogic.Utils;
 
 
 namespace Avvir.BusinessLogic.Auth
 {
     public class Register : ICallabaleBL
     {
-        public IResult Result { get; }
+        public IResult Result { get { return _result; } } 
         private IResult _result;
 
-        public RegisterModel Model { get; }
+        public RegisterModel Model { get { return _model; } }
         private RegisterModel _model;
 
         public Register(RegisterModel model)
         {
             _model = model;
+            _result = new ProcessLogicResult();
+            ProcessLogic();
         }
         public void ProcessLogic()
         {
@@ -40,18 +43,22 @@ namespace Avvir.BusinessLogic.Auth
                         if (!db.Account.Any(a => a.Email == _model.Email))
                         {
                             db.CreateUser(_model.Name, hp.Hash, _model.Name);
+                            _result.Message = "Ok";
+                            _result.Code = 0;
                         }
+                        else throw new Exception("Duplicare email");
                     }
                 }
                 else throw new Exception(hp.Result.Message);
             }
             catch (Exception ex)
             {
-                //tba
+                _result.Code = 1;
+                _result.Message = ex.Message;
             }
             finally
             {
-                //tba
+                
             }
         }
     }

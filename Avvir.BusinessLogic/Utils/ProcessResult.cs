@@ -9,10 +9,14 @@ namespace Avvir.BusinessLogic.Utils
 {
     sealed class ProcessLogicResult : IResult
     {
-        public string Message { get { return _message; } }
+        public string Message { get { return _message; } set { _message = value; } }
         private string _message;
 
-        public int Code { get { return _code; } }
+        public int Code
+        {
+            get { return _code; }
+            set { _code = value; }
+        }
         private int _code;
 
         public ProcessLogicResult(string message, int code)

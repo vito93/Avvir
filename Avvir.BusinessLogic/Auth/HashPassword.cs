@@ -13,7 +13,7 @@ namespace Avvir.BusinessLogic.Auth
 {
     public class HashPassword : ICallabaleBL
     {
-        public IResult Result { get; }
+        public IResult Result { get { return _result; } }
         private IResult _result;
 
         public string Hash { get { return _hash; } }
@@ -21,12 +21,13 @@ namespace Avvir.BusinessLogic.Auth
 
         private string password;
         private readonly int defaultWorkCost = 11;
-        private readonly int defaultHashType = -1;
+        private readonly BCrypt.Net.HashType defaultHashType = BCrypt.Net.HashType.SHA256;
 
         public HashPassword(string password)
         {
             this.password = password;
-            this.Result = new ProcessLogicResult();
+            _result = new ProcessLogicResult();
+            ProcessLogic();
         }
         public void ProcessLogic()
         {
@@ -34,7 +35,8 @@ namespace Avvir.BusinessLogic.Auth
             {
                 // Set default BCryptSettings
                 int workCost = defaultWorkCost;
-                int hashType = defaultHashType;
+                BCrypt.Net.HashType hashType = defaultHashType;
+                int hashTypeConf;
 
                 // Try to override default settings from App.config
                 NameValueCollection bcryptSettings =
@@ -43,15 +45,20 @@ namespace Avvir.BusinessLogic.Auth
                 if (bcryptSettings != null)
                 {
                     Int32.TryParse(bcryptSettings["WorkCost"], out workCost);
-                    Int32.TryParse(bcryptSettings["HashType"], out hashType);
+                    Int32.TryParse(bcryptSettings["HashType"], out hashTypeConf);
+                    hashType = (BCrypt.Net.HashType)hashTypeConf;
                 }
-                
+
                 // Compute enhanced hash
-                _hash = BcryptNet.EnhancedHashPassword(this.password, (BCrypt.Net.HashType)hashType, workCost);
+                _hash = BcryptNet.EnhancedHashPassword(this.password, hashType, workCost);
+
+                _result.Message = "Ok";
+                _result.Code = 0;
             }
             catch (Exception ex)
             {
-                //tba
+                _result.Code = 1;
+                _result.Message = ex.Message;
             }
             finally
             {

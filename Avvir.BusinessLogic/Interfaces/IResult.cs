@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Avvir.BusinessLogic.Interfaces
 
-namespace Avvir.BusinessLogic.Interfaces
 {
     public interface IResult
     {
-        string Message { get; }
+        string Message { get; set; }
 
-        int Code { get; }
+        int Code { get; set; }
     }
 }
