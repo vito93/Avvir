@@ -18,7 +18,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avvir.Desktop", "Avvir.Desk
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avvir.DataLayer.Core", "Avvir.DataLayer.Core\Avvir.DataLayer.Core.csproj", "{78EF737F-CE8C-47E2-B269-FB26643EE8EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avvir.BusinessLogic.Core", "Avvir.BusinessLogic.Core\Avvir.BusinessLogic.Core.csproj", "{E8871B68-668C-4145-8FC3-41CB8521ABFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avvir.BusinessLogic.Core", "Avvir.BusinessLogic.Core\Avvir.BusinessLogic.Core.csproj", "{E8871B68-668C-4145-8FC3-41CB8521ABFA}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "AvvirDatabase", "AvvirDatabase\AvvirDatabase.sqlproj", "{F7B595D3-8FEB-4DA1-A8DE-B1C13EF05424}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +56,12 @@ Global
 		{E8871B68-668C-4145-8FC3-41CB8521ABFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8871B68-668C-4145-8FC3-41CB8521ABFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8871B68-668C-4145-8FC3-41CB8521ABFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7B595D3-8FEB-4DA1-A8DE-B1C13EF05424}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7B595D3-8FEB-4DA1-A8DE-B1C13EF05424}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7B595D3-8FEB-4DA1-A8DE-B1C13EF05424}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F7B595D3-8FEB-4DA1-A8DE-B1C13EF05424}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7B595D3-8FEB-4DA1-A8DE-B1C13EF05424}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7B595D3-8FEB-4DA1-A8DE-B1C13EF05424}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
