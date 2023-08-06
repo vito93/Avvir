@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avvir.DataLayer", "Avvir.DataLayer\Avvir.DataLayer.csproj", "{00497AD5-EBF0-446B-A60C-BA676BFF218B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avvir.BusinessLogic", "Avvir.BusinessLogic\Avvir.BusinessLogic.csproj", "{F233F94A-C93C-4CF4-803F-D392FC112109}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avvir.Middleware.Core", "Avvir.Middleware.Core\Avvir.Middleware.Core.csproj", "{DEC0FF67-3E16-4D2D-BC41-B07BBC09ABF2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avvir.UnitTest.Middleware.Core", "Avvir.UnitTest.Middleware.Core\Avvir.UnitTest.Middleware.Core.csproj", "{459EA288-D79D-4E03-9F1C-20C5B38215F8}"
@@ -28,14 +24,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{00497AD5-EBF0-446B-A60C-BA676BFF218B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00497AD5-EBF0-446B-A60C-BA676BFF218B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{00497AD5-EBF0-446B-A60C-BA676BFF218B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{00497AD5-EBF0-446B-A60C-BA676BFF218B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F233F94A-C93C-4CF4-803F-D392FC112109}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F233F94A-C93C-4CF4-803F-D392FC112109}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F233F94A-C93C-4CF4-803F-D392FC112109}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F233F94A-C93C-4CF4-803F-D392FC112109}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DEC0FF67-3E16-4D2D-BC41-B07BBC09ABF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DEC0FF67-3E16-4D2D-BC41-B07BBC09ABF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEC0FF67-3E16-4D2D-BC41-B07BBC09ABF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
