@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+//using Avvir.DataLayer.Database;
 using Avvir.DataLayer.Database;
 using Avvir.BusinessLogic.Utils;
 
@@ -46,7 +47,7 @@ namespace Avvir.BusinessLogic.Auth
                             _result.Message = "Ok";
                             _result.Code = 0;
                         }
-                        else throw new Exception("Duplicare email");
+                        else throw new Exception("Duplicate email");
                     }
                 }
                 else throw new Exception(hp.Result.Message);

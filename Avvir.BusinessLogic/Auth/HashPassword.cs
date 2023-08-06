@@ -50,7 +50,7 @@ namespace Avvir.BusinessLogic.Auth
                 }
 
                 // Compute enhanced hash
-                _hash = BcryptNet.EnhancedHashPassword(this.password, hashType, workCost);
+                 _hash = BcryptNet.EnhancedHashPassword(this.password, hashType, workCost);
 
                 _result.Message = "Ok";
                 _result.Code = 0;

@@ -42,11 +42,11 @@ namespace Avvir.BusinessLogic.Auth
                         // Duplicates by email
                         if (!db.Accounts.Any(a => a.Email == _model.Email))
                         {
-                            db.Database.ExecuteSqlRaw("CreateUser @p0, @p1, @p2", parameters: new[] { _model.Name, hp.Hash, _model.Name });
+                            db.Database.ExecuteSqlRaw("api.CreateUser @p0, @p1, @p2", parameters: new[] { _model.Name, hp.Hash, _model.Name });
                             _result.Message = "Ok";
                             _result.Code = 0;
                         }
-                        else throw new Exception("Duplicare email");
+                        else throw new Exception("Duplicate email");
                     }
                 }
                 else throw new Exception(hp.Result.Message);

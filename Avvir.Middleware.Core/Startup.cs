@@ -32,11 +32,11 @@ namespace Avvir.Middleware.Core
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             // For Identity
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-            .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddDefaultTokenProviders();
+            //services.AddIdentity<ApplicationUser, IdentityRole>()
+            //.AddEntityFrameworkStores<ApplicationDbContext>()
+            //.AddDefaultTokenProviders();
 
             // Adding Authentication
             services.AddAuthentication(options =>
