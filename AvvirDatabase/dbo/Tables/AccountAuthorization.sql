@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[AccountAuthorization] (
-    [GUID]        UNIQUEIDENTIFIER CONSTRAINT [DF_AccountAuthorization_GUID] DEFAULT (newsequentialid()) NOT NULL,
+    [GUID]        UNIQUEIDENTIFIER CONSTRAINT [DF_AccountAuthorization_GUID] DEFAULT (newid()) NOT NULL,
     [AccountGUID] UNIQUEIDENTIFIER NOT NULL,
     [CreateDate]  DATETIME         CONSTRAINT [DF_AccountAuthorization_CreateDate] DEFAULT (getdate()) NOT NULL,
     [ValidTo]     DATETIME         NOT NULL,
